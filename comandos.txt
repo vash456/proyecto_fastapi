@@ -1,5 +1,16 @@
-# iniciar el proyecto
-python -m venv app-fastapi
+# crear entorno virtual
+python -m venv venv
+
+# activar entorno virtual
+venv\Scripts\activate
+
+# instalar todas las dependencias del entorno virtual
+pip install -r requirements.txt
+
+# Para ejecutar la aplicacion
+fastapi dev app/main.py
+
+# --------------------------
 
 # instalar las librerias de fastapi
 pip install fastapi
@@ -8,9 +19,7 @@ pip install "fastapi[standard]"    # instalacion mas completa
 # luego en la ruta del proyecto crear el archivo requirements.txt
 pip freeze > requirements.txt
 
-# crear archivo main.py por fuera de la carpeta del entorno virtual
-# para ejecutar ubicarse en el directorio del archivo main.py
-fastapi dev
+
 
 # para ver la documentacion de la api con swagger
 http://127.0.0.1:8000/docs
