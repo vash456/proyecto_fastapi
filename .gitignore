@@ -10,3 +10,6 @@ wheels/
 # Virtual environments
 .venv
 venv
+
+# Database files
+db.sqlite3

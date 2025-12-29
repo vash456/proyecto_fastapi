@@ -21,10 +21,13 @@ class Customer(CustomerBase, table=True):
     id: int | None = Field(default=None, primary_key=True)
 
 
-class Transaction(BaseModel):
-    id: int
+class TransactionBase(SQLModel):
     ammount: int
     description: str
+
+class Transaction(TransactionBase, table=True):
+    id: int | None = Field(default=None, primary_key=True)
+    
 
 
 class Invoice(BaseModel):
