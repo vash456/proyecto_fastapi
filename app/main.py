@@ -12,6 +12,7 @@ app.include_router(transactions.router)
 app.include_router(invoices.router)
 app.include_router(plans.router)
 
+
 @app.middleware("http")
 async def log_request_time(request: Request, call_next):
     start_time = time.time()
@@ -20,11 +21,13 @@ async def log_request_time(request: Request, call_next):
     print(f"Request: {request.url} completed in: {process_time:.4f} seconds")
     return response
 
+
 @app.middleware("http")
 async def log_request_headers(request: Request, call_next):
     # print(f"Request: {request.url} headers: {request.headers}")
     response = await call_next(request)
     return response
+
 
 @app.get("/")
 async def root():

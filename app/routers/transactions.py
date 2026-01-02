@@ -38,12 +38,13 @@ async def list_transactions(
     items_in_page = len(transactions)
     page = (skip // limit) + 1
     return {
-        "pagination":{
+        "pagination": {
             "skip": skip,
             "limit": limit,
             "total_pages": total_pages,
             "total_items": total_items,
             "items_in_page": items_in_page,
-            "page": page
+            "page": page,
         },
-        "data": transactions}
+        "data": transactions,
+    }
