@@ -84,7 +84,11 @@ async def delete_customer(session: SessionDep, customer_id: int):
     return {"detail": "ok"}
 
 
-@router.post("/customers/{customer_id}/plans/{plan_id}", tags=["customers"])
+@router.post(
+    "/customers/{customer_id}/plans/{plan_id}",
+    status_code=status.HTTP_201_CREATED,
+    tags=["customers"],
+)
 async def subscribe_customer_to_plan(
     customer_id: int,
     plan_id: int,
