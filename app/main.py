@@ -1,7 +1,9 @@
+from typing import Annotated
 import zoneinfo
 import time
 from datetime import datetime
-from fastapi import FastAPI, Request
+from fastapi import Depends, FastAPI, HTTPException, Request, status
+from fastapi.security import HTTPBasic, HTTPBasicCredentials
 from db import create_all_tables
 from .routers import customers, transactions, invoices, plans
 
@@ -29,9 +31,14 @@ async def log_request_headers(request: Request, call_next):
     return response
 
 
+security = HTTPBasic()
 @app.get("/")
-async def root():
-    return {"message": "Hola mundo"}
+async def root(credentials: Annotated[HTTPBasicCredentials, Depends(security)]):
+    print(credentials)
+    if credentials.username == "admin" and credentials.password == "1234":
+        return {"message": f"Hola, {credentials.username}"}
+    else:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED)
 
 
 country_timezones = {
