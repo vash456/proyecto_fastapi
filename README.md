@@ -2,13 +2,14 @@
 
 ## Descripción
 
-Este proyecto es una aplicación sencilla construida con FastAPI para el manejo de facturas, clientes y transacciones. Utiliza una base de datos SQLite para almacenar los datos y proporciona una API RESTful para interactuar con la aplicación.
+Este proyecto es una aplicación sencilla construida con FastAPI para el manejo de facturas, clientes, transacciones y planes. Utiliza una base de datos SQLite para almacenar los datos y proporciona una API RESTful para interactuar con la aplicación.
 
 ## Características
 
 - Gestión de clientes
 - Gestión de facturas
 - Gestión de transacciones
+- Gestión de planes
 - API RESTful con documentación automática
 - Base de datos SQLite
 
@@ -71,6 +72,16 @@ La aplicación estará disponible en:
 - **Documentación Swagger UI**: http://127.0.0.1:8000/docs
 - **Documentación ReDoc**: http://127.0.0.1:8000/redoc
 
+## Ejecutar los Tests
+
+Para ejecutar los tests del proyecto, utiliza pytest:
+
+```bash
+pytest
+```
+
+Los tests están ubicados en la carpeta `tests/` y utilizan una base de datos de prueba SQLite.
+
 ## Estructura del Proyecto
 
 ```
@@ -82,6 +93,7 @@ app_fast_api/
 │       ├── __init__.py
 │       ├── customers.py     # Endpoints para clientes
 │       ├── invoices.py      # Endpoints para facturas
+│       ├── plans.py         # Endpoints para planes
 │       └── transactions.py  # Endpoints para transacciones
 ├── db.py                    # Configuración de la base de datos
 ├── models.py                # Modelos de datos
@@ -97,18 +109,20 @@ app_fast_api/
 - `GET /customers` - Listar todos los clientes
 - `GET /customers/{id}` - Obtener un cliente específico
 - `PATCH /customers/{id}` - Actualizar un cliente
+- `DELETE /customers/{id}` - Eliminar un cliente
+- `POST /customers/{customer_id}/plans/{plan_id}` - Suscribir cliente a un plan
+- `GET /customers/{customer_id}/plans` - Listar planes de un cliente
 
 ### Facturas
 - `POST /invoices` - Crear una nueva factura
-- `GET /invoices` - Listar todas las facturas
-- `GET /invoices/{id}` - Obtener una factura específica
-- `PATCH /invoices/{id}` - Actualizar una factura
 
 ### Transacciones
 - `POST /transactions` - Crear una nueva transacción
-- `GET /transactions` - Listar todas las transacciones
-- `GET /transactions/{id}` - Obtener una transacción específica
-- `PATCH /transactions/{id}` - Actualizar una transacción
+- `GET /transactions` - Listar todas las transacciones (con paginación)
+
+### Planes
+- `POST /plans` - Crear un nuevo plan
+- `GET /plans` - Listar todos los planes
 
 ### Otros
 - `GET /` - Mensaje de bienvenida
