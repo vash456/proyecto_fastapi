@@ -2,11 +2,12 @@ from typing import Annotated
 
 from fastapi import Depends, FastAPI
 from sqlmodel import Session, create_engine, SQLModel
+from app.core.config import settings
 
-sqlite_name = "db.sqlite3"
-sqlite_url = f"sqlite:///{sqlite_name}"
+# sqlite_name = "db.sqlite3"
+# sqlite_url = f"sqlite:///{sqlite_name}"
 
-engine = create_engine(sqlite_url)
+engine = create_engine(settings.DATABASE_URL,echo=settings.DEBUG)
 
 
 def create_all_tables(app: FastAPI):
