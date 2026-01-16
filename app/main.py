@@ -5,7 +5,7 @@ from datetime import datetime
 from fastapi import Depends, FastAPI, HTTPException, Request, status
 from fastapi.security import HTTPBasic, HTTPBasicCredentials
 from db import create_all_tables
-from .routers import customers, transactions, invoices, plans
+from .routers import customers, transactions, invoices, plans, auth
 from app.core.config import settings
 
 app = FastAPI(lifespan=create_all_tables,title=settings.APP_NAME,debug=settings.DEBUG)
@@ -13,6 +13,7 @@ app.include_router(customers.router)
 app.include_router(transactions.router)
 app.include_router(invoices.router)
 app.include_router(plans.router)
+app.include_router(auth.router)
 
 
 @app.middleware("http")
